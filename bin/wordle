@@ -1,0 +1,21 @@
+#!/usr/bin/env raku
+
+use Games::Wordle;
+
+my Games::Wordle $wordle.=new;
+
+until $wordle.result {
+	with prompt '> ' -> $in {
+		 with $wordle.guess($in) {
+			.join.say
+		}
+		else {
+			.exception.message.say
+		}
+	}
+	else {
+		exit;
+	}
+}
+
+"\n$wordle.result()".say;

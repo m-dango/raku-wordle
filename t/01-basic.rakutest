@@ -1,0 +1,26 @@
+use Test;
+use Games::Wordle;
+
+my Games::Wordle $wordle.=new(:answer<camel>);
+
+for (
+	:mommy<⬜ ⬜ 🟩 ⬜ ⬜>,
+	:music<🟨 ⬜ ⬜ ⬜ 🟨>,
+	:chime<🟩 ⬜ ⬜ 🟨 🟨>,
+	:claim<🟩 🟨 🟨 ⬜ 🟨>,
+) {
+	is-deeply $wordle.guess(.key), .value;
+	is-deeply $wordle.result, Nil;
+}
+
+is-deeply $wordle.guess('camel'), <🟩 🟩 🟩 🟩 🟩>;
+is-deeply $wordle.result, q:to/END/.trim;
+Wordle # 5/6
+⬜⬜🟩⬜⬜
+🟨⬜⬜⬜🟨
+🟩⬜⬜🟨🟨
+🟩🟨🟨⬜🟨
+🟩🟩🟩🟩🟩
+END
+
+done-testing;

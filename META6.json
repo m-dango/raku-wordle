@@ -1,0 +1,27 @@
+{
+  "authors": [
+    "Daniel Mita"
+  ],
+  "build-depends": [
+  ],
+  "depends": [
+  ],
+  "description": "Wordle in Raku",
+  "license": "Artistic-2.0",
+  "name": "Games::Wordle",
+  "perl": "6.d",
+  "provides": {
+    "Games::Wordle": "lib/Games/Wordle.rakumod"
+  },
+  "resources": [
+    "resources/answers.txt",
+    "resources/words.txt"
+  ],
+  "source-url": "https://github.com/m-dango/raku-wordle",
+  "tags": [
+    "game"
+  ],
+  "test-depends": [
+  ],
+  "version": "0.0.1"
+}
