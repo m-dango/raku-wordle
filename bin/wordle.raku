@@ -4,7 +4,6 @@ use Games::Wordle;
 
 my Games::Wordle $wordle.=new;
 
-
 "Wordle $wordle.number()\nEnter your guess:".say;
 
 until $wordle.result {
@@ -22,4 +21,4 @@ until $wordle.result {
 	}
 }
 
-"\n$wordle.result()".say;
+"$wordle.answer()\n\n$wordle.result()".say;

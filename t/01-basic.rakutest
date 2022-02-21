@@ -9,18 +9,27 @@ for (
 	:chime<🟩 ⬜ ⬜ 🟨 🟨>,
 	:claim<🟩 🟨 🟨 ⬜ 🟨>,
 ) {
-	is-deeply $wordle.guess(.key), .value;
-	is-deeply $wordle.result, Nil;
+	is-deeply $wordle.guess(.key), .value, "｢$_.key()｣ gives correct tiles";
+	is-deeply $wordle.result, Nil, 'No result for unfinished game';
 }
 
-is-deeply $wordle.guess('camel'), <🟩 🟩 🟩 🟩 🟩>;
-is-deeply $wordle.result, q:to/END/.trim;
+is-deeply $wordle.guess('camel'), <🟩 🟩 🟩 🟩 🟩>, 'correct guess gives correct tiles';
+is-deeply $wordle.result, q:to/END/.trim, 'result prints correctly for completed game';
 Wordle # 5/6
 ⬜⬜🟩⬜⬜
 🟨⬜⬜⬜🟨
 🟩⬜⬜🟨🟨
 🟩🟨🟨⬜🟨
 🟩🟩🟩🟩🟩
+END
+
+$wordle.=new(:number<0>, :guess-limit<1>);
+$wordle.guess('camel');
+
+is $wordle.answer, 'CIGAR';
+is-deeply $wordle.result, q:to/END/.trim, 'Specified number and guess limit gives correct game and result';
+Wordle 0 X/1
+🟩🟨⬜⬜⬜
 END
 
 done-testing;

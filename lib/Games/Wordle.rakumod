@@ -15,12 +15,13 @@ my class X::Games::Wordle::GameOver does X::Games::Wordle {
 	}
 }
 
-class Games::Wordle:ver<0.0.1> {
+class Games::Wordle:ver<0.0.2> {
 	has Int    $.number = Date.today - Date('2021-06-19');
 	has Str    $.answer;
 	has        @.valid-inputs is Set;
-	has Pair:D @!guesses;
 	has UInt:D $.guess-limit = 6;
+
+	has Pair:D @!guesses;
 	has UInt:D $!guess-count = 0;
 	has Bool:D $!finished    = False;
 	has Bool:D $!solved      = False;
