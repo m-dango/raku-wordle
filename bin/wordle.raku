@@ -16,7 +16,7 @@ until $wordle.result {
 		}
 	}
 	else {
-		"\n".say;
+		''.say;
 		exit;
 	}
 }

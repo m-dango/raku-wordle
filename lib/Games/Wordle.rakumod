@@ -47,7 +47,7 @@ class Games::Wordle:ver<0.0.2> {
 			.Set;
 	}
 
-	method gist {
+	method Str {
 		return @!guesses.gist;
 	}
 
