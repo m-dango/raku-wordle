@@ -4,6 +4,9 @@ use Games::Wordle;
 
 my Games::Wordle $wordle.=new;
 
+
+"Wordle $wordle.number()\nEnter your guess:".say;
+
 until $wordle.result {
 	with prompt '> ' -> $in {
 		 with $wordle.guess($in) {
@@ -14,6 +17,7 @@ until $wordle.result {
 		}
 	}
 	else {
+		"\n".say;
 		exit;
 	}
 }
