@@ -21,4 +21,4 @@ until $wordle.result {
 	}
 }
 
-"$wordle.answer()\n\n$wordle.result()".say;
+"\n$wordle.answer()\n\n$wordle.result()".say;

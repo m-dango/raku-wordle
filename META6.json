@@ -14,8 +14,8 @@
     "Games::Wordle": "lib/Games/Wordle.rakumod"
   },
   "resources": [
-    "resources/answers.txt",
-    "resources/words.txt"
+    "answers.txt",
+    "words.txt"
   ],
   "source-url": "https://github.com/m-dango/raku-wordle",
   "tags": [
@@ -23,5 +23,5 @@
   ],
   "test-depends": [
   ],
-  "version": "0.0.2"
+  "version": "0.0.3"
 }

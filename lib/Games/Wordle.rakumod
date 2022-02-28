@@ -15,16 +15,15 @@ my class X::Games::Wordle::GameOver does X::Games::Wordle {
 	}
 }
 
-class Games::Wordle:ver<0.0.2> {
+class Games::Wordle:ver<0.0.3> {
 	has Int    $.number = Date.today - Date('2021-06-19');
 	has Str    $.answer;
 	has        @.valid-inputs is Set;
 	has UInt:D $.guess-limit = 6;
 
 	has Pair:D @!guesses;
-	has UInt:D $!guess-count = 0;
-	has Bool:D $!finished    = False;
-	has Bool:D $!solved      = False;
+	has Bool:D $!finished = False;
+	has Bool:D $!solved   = False;
 
 	has $.correct-tile = '🟩';
 	has $.present-tile = '🟨';
@@ -34,8 +33,12 @@ class Games::Wordle:ver<0.0.2> {
 		if $!answer {
 			$!number = Nil;
 		}
+		orwith %?RESOURCES<answers.txt> {
+			$!answer = .lines[$!number % *];
+		}
 		else {
-			$!answer = %?RESOURCES<answers.txt>.lines[$!number % *];
+			$!answer = 'CAMEL';
+			$!number = Nil;
 		}
 		$!answer.=uc;
 
@@ -52,7 +55,7 @@ class Games::Wordle:ver<0.0.2> {
 	}
 
 	proto method guess ( Str:D $guess ) {
-		if $!finished or $!guess-count >= $!guess-limit {
+		if $!finished or @!guesses >= $!guess-limit {
 			return fail X::Games::Wordle::GameOver.new;
 		}
 
@@ -72,10 +75,6 @@ class Games::Wordle:ver<0.0.2> {
 	}
 
 	multi method guess ( $guess ) {
-		if ++$!guess-count >= $.guess-limit {
-			$!finished = True;
-		}
-
 		my @tiles;
 		if $guess eq $.answer {
 			@tiles     = $.correct-tile xx $.answer.chars;
@@ -110,6 +109,11 @@ class Games::Wordle:ver<0.0.2> {
 		}
 
 		@!guesses.push($guess => @tiles.List);
+
+		if @!guesses >= $.guess-limit {
+			$!finished = True;
+		}
+
 		return @tiles.List;
 	}
 
@@ -117,7 +121,7 @@ class Games::Wordle:ver<0.0.2> {
 
 	method result {
 		if $!finished {
-			return "Wordle { $!number // '#' } { $!solved ?? $!guess-count !! 'X' }/$!guess-limit"
+			return "Wordle { $!number // '#' } { $!solved ?? +@!guesses !! 'X' }/$!guess-limit"
 				~ "{ '*' if $.hard-mode }\n"
 				~ @!guesses.map(*.value.join).join("\n");
 		}

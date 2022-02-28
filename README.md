@@ -1,3 +1,5 @@
+[![Actions Status](https://github.com/m-dango/raku-wordle/workflows/test/badge.svg)](https://github.com/m-dango/raku-wordle/actions)
+
 NAME
 ====
 
