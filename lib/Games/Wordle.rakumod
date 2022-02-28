@@ -45,8 +45,7 @@ class Games::Wordle:ver<0.0.3> {
 		@!valid-inputs :=
 			( $!answer ∪ (@!valid-inputs || %?RESOURCES<words.txt>.lines) )
 			.keys
-			.grep(*.chars == $!answer.chars)
-			.map(*.uc)
+			.map({ $^word.chars == $!answer.chars ?? $word.uc !! Empty })
 			.Set;
 	}
 
