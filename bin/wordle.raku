@@ -2,7 +2,11 @@
 
 use Games::Wordle;
 
-my Games::Wordle $wordle.=new;
+subset Number of Str where !.defined || (.Int.so && .Int > 0);
+
+unit sub MAIN (Number :$number);
+
+my Games::Wordle $wordle.=new: |do :number(.Int) with $number;
 
 "Wordle $wordle.number()\nEnter your guess:".say;
 
