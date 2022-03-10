@@ -34,10 +34,7 @@ class Games::Wordle:ver<0.0.3> {
 			$!number = Nil;
 		}
 		orwith %?RESOURCES<answers.txt> {
-			given .lines {
-				$!number = $!number % +$_;
-				$!answer = .[$!number];
-			}
+			$!answer = .lines[$!number %= *];
 		}
 		else {
 			$!answer = 'CAMEL';
