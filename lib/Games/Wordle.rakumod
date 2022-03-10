@@ -34,11 +34,9 @@ class Games::Wordle:ver<0.0.3> {
 			$!number = Nil;
 		}
 		orwith %?RESOURCES<answers.txt> {
-			given .lines -> @lines {
-				given +@lines {
-					$!number = $!number % $_ || $_;
-				}
-				$!answer = @lines[$!number - 1];
+			given .lines {
+				$!number = $!number % +$_;
+				$!answer = .[$!number];
 			}
 		}
 		else {
