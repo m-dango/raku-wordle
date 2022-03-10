@@ -2,27 +2,31 @@
 
 use Games::Wordle;
 
-subset Number of Str where !.defined || (.Int.so && .Int > 0);
+multi MAIN (Int:D $number) { samewith(:$number) }
 
-unit sub MAIN (Number :$number);
+multi MAIN (
+	IntStr :n(:$number), #= Specify which daily Wordle to attempt.
+) {
+	my Games::Wordle $wordle.=new(
+		|(:$number if $number.defined && $number.chars),
+	);
 
-my Games::Wordle $wordle.=new: |do :number(.Int) with $number;
+	"Wordle $wordle.number()\nEnter your guess:".say;
 
-"Wordle $wordle.number()\nEnter your guess:".say;
-
-until $wordle.result {
-	with prompt '> ' -> $in {
-		 with $wordle.guess($in) {
-			.join.say
+	until $wordle.result {
+		with prompt '> ' -> $in {
+			 with $wordle.guess($in) {
+				.join.say
+			}
+			else {
+				.exception.message.say
+			}
 		}
 		else {
-			.exception.message.say
+			''.say;
+			exit;
 		}
 	}
-	else {
-		''.say;
-		exit;
-	}
-}
 
-"\n$wordle.answer()\n\n$wordle.result()".say;
+	"\n$wordle.answer()\n\n$wordle.result()".say;
+}
