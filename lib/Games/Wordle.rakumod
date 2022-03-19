@@ -5,7 +5,7 @@ my class X::Games::Wordle::InvalidGuess does X::Games::Wordle {
 	has Str $.reason;
 
 	method message {
-		"｢$.guess｣ is not a valid guess.{ ' ' if $.reason }$.reason"
+		“｢$.guess｣ is not a valid guess.{ “ $_” with $.reason }”
 	}
 }
 
@@ -34,7 +34,7 @@ class Games::Wordle:ver<0.0.3> {
 			$!number = Nil;
 		}
 		orwith %?RESOURCES<answers.txt> {
-			$!answer = .lines[$!number % *];
+			$!answer = .lines[$!number %= *];
 		}
 		else {
 			$!answer = 'CAMEL';
@@ -167,7 +167,7 @@ Games::Wordle is a Raku implementation of the game Wordle, hosted by The New Yor
 Games::Wordle uses the same word list and daily answers as the NYT version by default.
 You may also customize the game by providing your own answer, list of valid inputs, or number of guesses
 via the C<new> method with the options C<:answer>, C<:valid-inputs>, and C<:guess-limit>.
-The tiles can also be changed with the C<:correct-tile>, C<:present-tile>, and C<absent-tile> options.
+The tiles can also be changed with the C<:correct-tile>, C<:present-tile>, and C<:absent-tile> options.
 
 The class is intended to be flexible, allowing for constructing Wordle variants with options via the `new` method.
 
