@@ -15,7 +15,7 @@ my class X::Games::Wordle::GameOver does X::Games::Wordle {
 	}
 }
 
-class Games::Wordle:ver<0.0.3> {
+class Games::Wordle:ver<0.0.4> {
 	has Int    $.number = Date.today - Date('2021-06-19');
 	has Str    $.answer;
 	has        @.valid-inputs is Set;
