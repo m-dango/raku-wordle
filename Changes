@@ -2,5 +2,8 @@ Revision history for Games-Wordle
 
 {{$NEXT}}
 
+0.0.4  2022-03-19T13:06:14Z
+    - Add --number option to bin
+
 0.0.3  2022-02-28T21:12:11Z
     - Initial version
